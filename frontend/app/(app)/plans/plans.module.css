@@ -1,0 +1,187 @@
+/* Plans — CSS Module */
+
+/* ── Header ──────────────────────────────────────────────────── */
+.headerSpacer {
+  width: 38px;
+}
+
+@media (min-width: 1024px) {
+  .header { padding: 12px 0; }
+}
+
+/* ── Hero ────────────────────────────────────────────────────── */
+.heroSection {
+  margin-top: 6px;
+  text-align: center;
+}
+
+.heroDiamond {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.heroTitle {
+  font-size: 34px;
+  line-height: 1.05;
+  margin: 10px 0 4px;
+}
+
+.heroSub {
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0 auto;
+  max-width: 280px;
+}
+
+@media (min-width: 1024px) {
+  .heroTitle  { font-size: 44px; }
+  .heroSub    { font-size: 14px; max-width: 360px; }
+}
+
+/* ── Active plan banner ──────────────────────────────────────── */
+.bannerCard {
+  width: 100%;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  background: linear-gradient(180deg, rgba(217,164,65,0.10), rgba(217,164,65,0.02));
+  border: 1px solid var(--gold-line);
+  cursor: pointer;
+}
+
+.bannerIcon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.bannerActive {
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.bannerName {
+  font-size: 15px;
+  margin-top: 3px;
+}
+
+@media (min-width: 1024px) {
+  .bannerCard { padding: 18px; }
+  .bannerName { font-size: 17px; }
+}
+
+/* ── Plan cards ──────────────────────────────────────────────── */
+.plansList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.planCard {
+  padding: 18px;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 20px;
+  align-items: start;
+}
+
+.planSelected {
+  border-color: var(--gold);
+  background: linear-gradient(180deg, rgba(217,164,65,0.10), rgba(217,164,65,0.02));
+}
+
+.planLeft {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.planName {
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.planBlurb {
+  font-size: 18px;
+  margin-top: 4px;
+  color: var(--ink);
+}
+
+.planBlurbActive { color: var(--gold); }
+
+.planFeatures {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.planRight {
+  min-width: 96px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.featuredBadge {
+  display: inline-flex;
+  margin-bottom: 14px;
+}
+
+.planPrice {
+  font-size: 32px;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.planCadence {
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+@media (min-width: 1024px) {
+  .plansList    { gap: 14px; }
+  .planCard     { padding: 22px; }
+  .planPrice    { font-size: 36px; }
+  .featureItem  { font-size: 14px; }
+}
+
+/* ── CTA ─────────────────────────────────────────────────────── */
+.ctaSection {
+  margin-top: 22px;
+}
+
+.ctaFooter {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}

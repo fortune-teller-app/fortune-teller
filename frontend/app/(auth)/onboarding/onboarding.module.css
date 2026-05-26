@@ -1,0 +1,76 @@
+/* Onboarding — CSS Module */
+
+/* ── Skip link ───────────────────────────────────────────────── */
+.skipLink {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: color 160ms;
+}
+
+.skipLink:hover { color: var(--ink-2); }
+
+@media (min-width: 1024px) {
+  .skipLink { letter-spacing: 0.22em; }
+}
+
+/* ── Mandala wrapper ─────────────────────────────────────────── */
+.mandalaWrap {
+  margin-bottom: 32px;
+}
+
+@media (min-width: 1024px) {
+  .mandalaWrap {
+    margin-top: 12px;
+    margin-bottom: 0;
+  }
+}
+
+/* ── Text block ──────────────────────────────────────────────── */
+@media (min-width: 1024px) {
+  .textWrap {
+    margin-top: 40px;
+  }
+}
+
+.headline {
+  font-size: 40px;
+  line-height: 1.05;
+  margin: 12px 0;
+  white-space: pre-line;
+}
+
+@media (min-width: 1024px) {
+  .headline {
+    font-size: 56px;
+    line-height: 1.04;
+    margin: 14px 0 0;
+  }
+}
+
+.subtext {
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+@media (min-width: 1024px) {
+  .subtext {
+    font-size: 15px;
+    max-width: 460px;
+    margin: 16px auto 0;
+  }
+}
+
+/* ── CTA button ──────────────────────────────────────────────── */
+.ctaBtn {
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .ctaBtn {
+    width: auto;
+    min-width: 360px;
+  }
+}

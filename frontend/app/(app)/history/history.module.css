@@ -1,0 +1,103 @@
+/* History — CSS Module */
+
+/* ── Header ──────────────────────────────────────────────────── */
+@media (min-width: 1024px) {
+  .header { padding: 12px 0; }
+}
+
+/* ── Stat line ───────────────────────────────────────────────── */
+.statSection    { margin-top: 4px; }
+.statParagraph  { margin: 0; line-height: 1.55; }
+.statNumber     { color: var(--gold); font-size: 22px; }
+.statLabel      { font-size: 17px; color: var(--ink); }
+
+@media (min-width: 1024px) {
+  .statSection  { margin-top: 8px; }
+  .statNumber   { font-size: 28px; }
+  .statLabel    { font-size: 22px; }
+}
+
+/* ── Filter chips ────────────────────────────────────────────── */
+.filterSection { margin-top: 18px; }
+
+.filterRow {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.chip {
+  height: 30px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid var(--gold-line-soft);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.chipActive {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+@media (min-width: 1024px) {
+  .filterSection  { margin-top: 14px; }
+  .filterRow      { flex-wrap: wrap; overflow-x: visible; gap: 8px; }
+  .chip           { height: 34px; padding: 0 16px; letter-spacing: 0.2em; flex-shrink: initial; }
+}
+
+/* ── Group headers ───────────────────────────────────────────── */
+.groupHeader  { margin-bottom: 10px; }
+.groupDay     { font-size: 18px; }
+.groupCount   { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; }
+.groupCard    { overflow: hidden; }
+
+@media (min-width: 1024px) {
+  .groupHeader  { margin-bottom: 12px; }
+  .groupDay     { font-size: 22px; }
+  .groupCount   { font-size: 11px; }
+}
+
+/* ── Entry rows ──────────────────────────────────────────────── */
+.entryRow {
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+}
+
+.entryBorder { border-top: 1px solid var(--gold-line-soft); }
+
+.entryTitle {
+  font-size: 16px;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.entrySub  { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; margin-top: 4px; }
+.entryMeta { display: none; }
+.entryTime { font-size: 13px; color: var(--ink-2); flex-shrink: 0; }
+
+/* Desktop: 4-column grid layout */
+@media (min-width: 1024px) {
+  .entryRow {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr) 200px 60px;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 24px;
+  }
+
+  .entryTitle   { font-size: 20px; }
+  .entrySub     { display: none; }
+  .entryMeta    { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; }
+  .entryTime    { font-size: 14px; text-align: right; }
+}

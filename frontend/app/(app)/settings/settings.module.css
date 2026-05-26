@@ -1,0 +1,17 @@
+/* Settings — CSS Module */
+
+.headerSpacer { width: 38px; }
+
+@media (min-width: 1024px) {
+  .header { padding: 12px 0; }
+}
+
+.versionSection {
+  margin-top: 28px;
+  text-align: center;
+}
+
+.version {
+  font-size: 14px;
+  color: var(--ink-3);
+}

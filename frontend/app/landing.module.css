@@ -1,0 +1,230 @@
+/* ============================================================
+   Landing screen — CSS Module
+   Owns: background gradient, typography (non-standard sizes /
+   tracking), absolute overlay positioning, component-specific
+   layout values. Tailwind handles all structural layout/spacing.
+   ============================================================ */
+
+/* ── Page background ─────────────────────────────────────── */
+.screen {
+  --landing-mandala-size: 240px;
+  --landing-moon-size: 26px;
+  --landing-practice-icon-size: 18px;
+  background:
+    radial-gradient(1100px 700px at 80%  -10%, rgba(217,164,65,0.06), transparent 60%),
+    radial-gradient(900px  700px at -10%  30%, rgba(91,71,180,0.10),  transparent 60%),
+    radial-gradient(1200px 900px at 50%  110%, rgba(28,18,70,0.70),   transparent 60%),
+    #050410;
+}
+
+@media (min-width: 1024px) {
+  .screen {
+    --landing-mandala-size: 380px;
+    --landing-moon-size: 32px;
+    --landing-practice-icon-size: 22px;
+  }
+}
+
+/* ── Brand word ──────────────────────────────────────────── */
+.brandName {
+  font-size: 18px;
+  letter-spacing: 0.16em;
+}
+
+@media (min-width: 1024px) {
+  .brandName {
+    font-size: 20px;
+    letter-spacing: 0.22em;
+  }
+}
+
+/* ── Auth links ──────────────────────────────────────────── */
+.authLinks {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.signIn,
+.signUp {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: color 160ms, border-color 160ms;
+}
+
+.signIn {
+  color: var(--ink-3);
+}
+
+.signIn:hover {
+  color: var(--ink-2);
+}
+
+.signUp {
+  color: var(--gold);
+}
+
+.signUp:hover {
+  color: var(--ink);
+}
+
+@media (min-width: 1024px) {
+  .authLinks {
+    gap: 20px;
+  }
+
+  .signIn,
+  .signUp {
+    letter-spacing: 0.2em;
+  }
+}
+
+/* ── Mandala overlay (date + crescent moon) ──────────────── */
+.mandalaOverlay {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  pointer-events: none;
+}
+
+@media (min-width: 1024px) {
+  .mandalaOverlay { top: 152px; }
+}
+
+/* ── Hero headline ───────────────────────────────────────── */
+.headline {
+  font-size: 52px;
+  line-height: 1;
+  letter-spacing: 0.005em;
+  margin: 0;
+}
+
+@media (min-width: 1024px) {
+  .headline {
+    font-size: 88px;
+    line-height: 0.96;
+    letter-spacing: -0.005em;
+  }
+}
+
+.goldText { color: var(--gold); }
+
+/* ── Subtext paragraph ───────────────────────────────────── */
+.subtext {
+  max-width: 290px;
+  margin: 20px auto 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+@media (min-width: 1024px) {
+  .subtext {
+    max-width: 480px;
+    margin-top: 26px;
+    font-size: 16px;
+  }
+}
+
+/* ── Practice tile grid ──────────────────────────────────── */
+.practiceGrid {
+  gap: 10px;
+  max-width: 430px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+@media (min-width: 700px) and (max-width: 1023px) {
+  .practiceGrid {
+    max-width: 520px;
+    gap: 12px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .practiceGrid {
+    max-width: none;
+    gap: 14px;
+  }
+}
+
+.practiceCard {
+  aspect-ratio: 1 / 1.15;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 72px;
+}
+
+@media (min-width: 700px) and (max-width: 1023px) {
+  .practiceCard {
+    aspect-ratio: 1 / 1;
+    max-height: 96px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .practiceCard {
+    gap: 12px;
+    max-height: none;
+  }
+}
+
+.practiceLabel {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+@media (min-width: 1024px) {
+  .practiceLabel {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+  }
+}
+
+/* ── CTA section ─────────────────────────────────────────── */
+.ctaWrap {
+  padding: 28px 24px 36px;
+}
+
+@media (min-width: 1024px) {
+  .ctaWrap {
+    padding: 56px 0 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+}
+
+.ctaBtn { width: 100%; }
+
+@media (min-width: 1024px) {
+  .ctaBtn {
+    width: auto;
+    min-width: 360px;
+  }
+}
+
+.ctaSupport {
+  margin: 14px 0 0;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+@media (min-width: 1024px) {
+  .ctaSupport { margin: 0; }
+}

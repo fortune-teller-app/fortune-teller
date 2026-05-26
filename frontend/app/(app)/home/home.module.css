@@ -1,0 +1,318 @@
+/* ============================================================
+   Dashboard — CSS Module
+   Mobile first; lg: (1024px) for desktop overrides.
+   ============================================================ */
+
+/* ── Header ───────────────────────────────────────────────────── */
+.screen {
+  --home-logo-size: 18px;
+  --home-practice-icon-size: 18px;
+  --home-recent-icon-size: 16px;
+}
+
+@media (min-width: 1024px) {
+  .screen {
+    --home-logo-size: 22px;
+    --home-practice-icon-size: 20px;
+    --home-recent-icon-size: 18px;
+  }
+}
+
+.header {
+  display: flex;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+@media (min-width: 1024px) {
+  .header {
+    padding: 28px 0 12px;
+  }
+}
+
+.headerInner {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 0 24px;
+}
+
+.headerInner :global(.right) {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (min-width: 700px) and (max-width: 1023px) {
+  .headerInner {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 36px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .headerInner {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding: 0 var(--pad-x);
+  }
+}
+
+.brandName {
+  font-size: 16px;
+  letter-spacing: 0.16em;
+}
+
+.bellBtn {
+  position: relative;
+  transition: background 160ms;
+}
+
+.bellBtn:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.notifDot {
+  position: absolute;
+  top: 7px;
+  right: 8px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 10px rgba(217, 164, 65, 0.6);
+}
+
+/* ── Section spacing ──────────────────────────────────────────── */
+.greetingSection  { padding-top: 6px; }
+.practiceSection  { margin-top: 30px; }
+.recentSection    { margin-top: 30px; }
+
+@media (min-width: 700px) and (max-width: 1023px) {
+  .greetingSection            { padding-top: 14px; }
+  .practiceSection,
+  .recentSection              { margin-top: 34px; }
+}
+
+@media (min-width: 1024px) {
+  .greetingSection            { padding-top: 0; margin-top: 12px; }
+  .practiceSection,
+  .recentSection              { margin-top: 44px; }
+}
+
+/* ── Greeting ─────────────────────────────────────────────────── */
+.headline {
+  font-size: 38px;
+  line-height: 1.05;
+  margin: 10px 0 4px;
+  letter-spacing: 0.005em;
+}
+
+@media (min-width: 700px) and (max-width: 1023px) {
+  .headline { font-size: 46px; }
+}
+
+@media (min-width: 1024px) {
+  .headline {
+    font-size: 56px;
+    line-height: 1.04;
+    margin: 0;
+  }
+}
+
+.subtext {
+  font-size: 13px;
+  margin: 0;
+  line-height: 1.55;
+}
+
+@media (min-width: 700px) and (max-width: 1023px) {
+  .subtext { font-size: 14px; margin-top: 8px; }
+}
+
+@media (min-width: 1024px) {
+  .subtext { font-size: 15px; margin: 14px 0 0; }
+}
+
+/* ── Practice grid ────────────────────────────────────────────── */
+.practiceGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 700px) {
+  .practiceGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+}
+
+.practiceCard {
+  padding: 16px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 132px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 700px) {
+  .practiceCard { min-height: 170px; padding: 20px; }
+}
+
+@media (min-width: 1024px) {
+  .practiceCard { min-height: 200px; padding: 22px; }
+}
+
+.practiceCardFeatured {
+  grid-column: span 2;
+  min-height: 165px;
+  border-color: var(--gold-line);
+  background:
+    radial-gradient(120% 90% at 85% 0%, rgba(217,164,65,0.14), transparent 55%),
+    linear-gradient(180deg, rgba(27,20,61,0.92), rgba(18,13,45,0.92));
+}
+
+@media (min-width: 700px) {
+  .practiceCardFeatured { grid-column: span 4; min-height: 180px; }
+}
+
+@media (min-width: 1024px) {
+  .practiceCardFeatured { min-height: 190px; }
+}
+
+/* Stronger border on practice icon circles (vs default gold-line-soft) */
+.practiceIcon {
+  border-color: var(--gold-line);
+}
+
+.featuredGlow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(217,164,65,0.12), transparent 32%),
+    radial-gradient(circle at 90% 10%, rgba(217,164,65,0.10), transparent 36%);
+  pointer-events: none;
+}
+
+.featuredSvg {
+  position: absolute;
+  right: -42px;
+  top: -52px;
+  width: 190px;
+  height: 190px;
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+@media (min-width: 700px) {
+  .featuredSvg { right: -58px; top: -70px; width: 260px; height: 260px; }
+}
+
+.practiceName {
+  font-size: 22px;
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: 0.005em;
+}
+
+.practiceNameFeatured {
+  font-size: 30px;
+}
+
+@media (min-width: 700px) and (max-width: 1023px) {
+  .practiceName         { font-size: 24px; }
+  .practiceNameFeatured { font-size: 32px; }
+}
+
+@media (min-width: 1024px) {
+  .practiceNameFeatured { font-size: 34px; }
+}
+
+.practiceSub {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+
+.practiceTextWrap  { margin-top: 18px; }
+.featuredTextWrap  { margin-top: 26px; }
+
+@media (min-width: 700px) {
+  .practiceTextWrap { margin-top: 28px; }
+  .featuredTextWrap { margin-top: 34px; }
+}
+
+/* ── Section link ─────────────────────────────────────────────── */
+.sectionLink {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  font-family: var(--sans);
+}
+
+/* ── Recent readings list ─────────────────────────────────────── */
+.recentList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media (min-width: 1024px) {
+  .recentList { gap: 12px; }
+}
+
+.recentCard {
+  width: 100%;
+  padding: 14px;
+  gap: 14px;
+  cursor: pointer;
+  text-align: left;
+}
+
+@media (min-width: 700px) and (max-width: 1023px) {
+  .recentCard { padding: 16px; gap: 15px; }
+}
+
+@media (min-width: 1024px) {
+  .recentCard { padding: 18px; gap: 16px; }
+}
+
+.recentTitle {
+  font-size: 17px;
+  line-height: 1.2;
+}
+
+@media (min-width: 1024px) {
+  .recentTitle { font-size: 22px; }
+}
+
+.recentSub {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+@media (min-width: 1024px) {
+  .recentSub { font-size: 11px; margin-top: 5px; }
+}
+
+/* ── Small phones ─────────────────────────────────────────────── */
+@media (max-width: 380px) {
+  .practiceGrid            { gap: 10px; }
+  .practiceCard            { min-height: 118px; padding: 14px; }
+  .practiceCardFeatured    { min-height: 150px; }
+  .practiceName            { font-size: 18px; }
+  .practiceNameFeatured    { font-size: 22px; }
+  .practiceSub             { font-size: 8px; letter-spacing: 0.14em; }
+  .recentCard              { padding: 13px; }
+  .recentTitle             { font-size: 16px; }
+}

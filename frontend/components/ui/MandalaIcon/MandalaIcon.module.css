@@ -1,0 +1,11 @@
+.root {
+  --mandala-render-size: var(--mandala-size);
+  --mandala-icon-render-size: var(--mandala-icon-size);
+}
+
+@media (min-width: 1024px) {
+  .root {
+    --mandala-render-size: var(--mandala-desktop-size);
+    --mandala-icon-render-size: var(--mandala-icon-desktop-size);
+  }
+}

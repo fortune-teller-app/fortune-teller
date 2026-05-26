@@ -1,0 +1,153 @@
+/* CurrentPlan — CSS Module */
+
+/* ── Header ──────────────────────────────────────────────────── */
+.headerSpacer {
+  width: 38px;
+}
+
+@media (min-width: 1024px) {
+  .header { padding: 12px 0; }
+}
+
+/* ── Hero ────────────────────────────────────────────────────── */
+.heroSection {
+  margin-top: 6px;
+  text-align: center;
+}
+
+/* Mandala + gold diamond circle */
+.mandalaWrap {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 14px;
+}
+
+.diamondCircle {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.diamondCircle::before {
+  content: '';
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, var(--gold), #b88838);
+  box-shadow: 0 0 30px rgba(217, 164, 65, 0.4);
+  position: absolute;
+}
+
+.diamondCircle > * {
+  position: relative;
+}
+
+.heroTitle {
+  font-size: 32px;
+  line-height: 1.05;
+  margin: 10px 0 4px;
+}
+
+.heroSub {
+  font-size: 13px;
+  line-height: 1.55;
+  margin: 12px auto 0;
+  max-width: 280px;
+}
+
+@media (min-width: 1024px) {
+  .heroTitle  { font-size: 40px; }
+  .heroSub    { font-size: 14px; }
+}
+
+/* ── Plan card ───────────────────────────────────────────────── */
+.planSection  { margin-top: 22px; }
+.planCard     { padding: 18px 22px 22px; }
+
+.planTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.planName {
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.planBlurb {
+  font-size: 18px;
+  margin-top: 4px;
+  color: var(--gold);
+}
+
+.planPriceWrap { text-align: right; }
+
+.planPrice    { font-size: 36px; line-height: 1; }
+.planCadence  { font-size: 11px; margin-top: 4px; }
+.planDivider  { margin: 18px 0; }
+
+.renewalGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.renewLabel {
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.renewValue {
+  font-size: 17px;
+  margin-top: 6px;
+}
+
+@media (min-width: 1024px) {
+  .planCard     { padding: 24px 28px 28px; }
+  .planPrice    { font-size: 44px; }
+  .renewValue   { font-size: 20px; }
+}
+
+/* ── Benefits ────────────────────────────────────────────────── */
+.sectionHeader  { margin-bottom: 12px; }
+.benefitsCard   { padding: 18px; }
+
+.benefitRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--gold-line-soft);
+}
+
+.benefitFirst { padding-top: 0; }
+.benefitLast  { padding-bottom: 0; border-bottom: none; }
+
+.benefitText {
+  font-size: 13px;
+  color: var(--ink);
+}
+
+@media (min-width: 1024px) {
+  .benefitText { font-size: 14px; }
+}
+
+/* ── CTAs ────────────────────────────────────────────────────── */
+.ctaSection { margin-top: 26px; }
+.cancelBtn  { margin-top: 12px; }
+
+.ctaNote {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}

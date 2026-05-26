@@ -1,0 +1,48 @@
+/* Toggle switch */
+.track {
+  width: 40px;
+  height: 22px;
+  border-radius: 999px;
+  position: relative;
+  background: rgba(247, 240, 228, 0.1);
+  transition: background 200ms;
+  flex-shrink: 0;
+  border: 0;
+}
+
+.on {
+  background: var(--gold);
+}
+
+.thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--ink-2);
+  transition: left 200ms, background 200ms;
+  pointer-events: none;
+}
+
+.thumbOn {
+  left: 20px;
+  background: var(--on-gold);
+}
+
+@media (min-width: 1024px) {
+  .track {
+    width: 44px;
+    height: 24px;
+  }
+
+  .thumb {
+    width: 20px;
+    height: 20px;
+  }
+
+  .thumbOn {
+    left: 22px;
+  }
+}

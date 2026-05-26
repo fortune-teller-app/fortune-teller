@@ -1,0 +1,72 @@
+/* SettingsRow + SettingsGroup */
+
+.row {
+  width: 100%;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: left;
+  color: var(--ink);
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.rowToggle {
+  cursor: default;
+}
+
+.rowDanger {
+  color: var(--danger);
+}
+
+.iconDanger {
+  border-color: rgba(224, 118, 100, 0.3);
+}
+
+.label {
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.value {
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+.groupTitle {
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.groupCard {
+  overflow: hidden;
+}
+
+.divider {
+  border-top: 1px solid var(--gold-line-soft);
+}
+
+@media (min-width: 1024px) {
+  .row {
+    padding: 18px 22px;
+    gap: 16px;
+  }
+
+  .label {
+    font-size: 18px;
+  }
+
+  .value {
+    font-size: 12px;
+    margin-top: 3px;
+  }
+
+  .groupTitle {
+    letter-spacing: 0.26em;
+    margin-bottom: 12px;
+  }
+}

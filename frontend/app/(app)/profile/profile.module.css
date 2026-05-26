@@ -1,0 +1,188 @@
+/* Profile — CSS Module */
+
+/* ── Header ──────────────────────────────────────────────────── */
+@media (min-width: 1024px) {
+  .header { padding: 12px 0; }
+}
+
+/* ── Identity ────────────────────────────────────────────────── */
+.identitySection { margin-top: 6px; }
+
+.identity {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.avatarWrap {
+  position: relative;
+  width: 78px;
+  height: 78px;
+  flex-shrink: 0;
+}
+
+.avatarInner {
+  position: absolute;
+  inset: 10px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #2a205a, #160e3a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--gold-line);
+}
+
+.avatarLetter {
+  font-size: 24px;
+  color: var(--gold);
+}
+
+.name {
+  font-size: 26px;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.birthInfo {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.badges {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+@media (min-width: 1024px) {
+  .identitySection  { margin-top: 8px; }
+  .identity         { gap: 28px; }
+
+  .avatarWrap       { width: 120px; height: 120px; }
+  .avatarInner      { inset: 18px; }
+  .avatarLetter     { font-size: 40px; }
+
+  .name             { font-size: 40px; }
+  .birthInfo        { margin-top: 8px; }
+  .badges           { gap: 8px; margin-top: 12px; }
+}
+
+/* ── Stats ───────────────────────────────────────────────────── */
+.statsCard {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  overflow: hidden;
+}
+
+.stat {
+  padding: 20px 0;
+  text-align: center;
+}
+
+.statBorder { border-left: 1px solid var(--gold-line-soft); }
+
+.statNumber {
+  font-size: 32px;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.statLabel {
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+
+@media (min-width: 1024px) {
+  .stat       { padding: 28px 0; }
+  .statNumber { font-size: 42px; }
+  .statLabel  { margin-top: 8px; font-size: 10px; }
+}
+
+/* ── Most read ───────────────────────────────────────────────── */
+.readCard { overflow: hidden; }
+
+.readRow {
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 32px 1fr 36px;
+  align-items: center;
+  gap: 14px;
+}
+
+.readBorder { border-top: 1px solid var(--gold-line-soft); }
+
+.readName { font-size: 16px; }
+
+.barTrack {
+  height: 1.5px;
+  background: rgba(217, 164, 65, 0.12);
+  margin-top: 6px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  background: var(--gold);
+}
+
+.readCount {
+  font-size: 17px;
+  color: var(--ink-2);
+  text-align: right;
+}
+
+@media (min-width: 1024px) {
+  .readRow {
+    padding: 22px;
+    grid-template-columns: 40px 1fr 60px;
+    gap: 18px;
+  }
+
+  .readName   { font-size: 20px; }
+  .barTrack   { height: 2px; margin-top: 8px; }
+  .readCount  { font-size: 22px; }
+}
+
+/* ── Membership card ─────────────────────────────────────────── */
+.memberSection { margin-top: 22px; }
+
+.memberCard {
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+
+.memberIcon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.memberName { font-size: 17px; }
+
+.memberSub {
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  margin-top: 3px;
+}
+
+@media (min-width: 1024px) {
+  .memberCard   { padding: 22px; gap: 18px; }
+  .memberIcon   { width: 46px; height: 46px; }
+  .memberName   { font-size: 20px; }
+  .memberSub    { font-size: 12px; margin-top: 4px; }
+}

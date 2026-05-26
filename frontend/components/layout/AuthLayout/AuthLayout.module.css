@@ -1,0 +1,16 @@
+/* AuthLayout — shared background for all auth screens */
+
+.bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.screen {
+  background:
+    radial-gradient(900px 700px at -10% 30%, rgba(91,71,180,0.10), transparent 60%),
+    radial-gradient(1200px 900px at 50% 110%, rgba(28,18,70,0.70), transparent 60%),
+    #050410;
+}

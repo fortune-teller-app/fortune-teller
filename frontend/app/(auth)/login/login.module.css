@@ -1,0 +1,100 @@
+/* Login — CSS Module */
+
+/* ── Return label ────────────────────────────────────────────── */
+.returnLabel {
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  transition: color 160ms;
+}
+
+.returnLabel:hover {
+  color: var(--ink-2);
+}
+
+/* ── Heading ─────────────────────────────────────────────────── */
+.headingWrap {
+  margin-top: 0;
+}
+
+@media (min-width: 1024px) {
+  .headingWrap {
+    margin-top: 36px;
+  }
+}
+
+.headline {
+  font-size: 38px;
+  line-height: 1.05;
+  margin: 10px 0 8px;
+}
+
+@media (min-width: 1024px) {
+  .headline {
+    font-size: 56px;
+    line-height: 1.04;
+  }
+}
+
+/* ── Form ────────────────────────────────────────────────────── */
+.fields {
+  margin-top: 28px;
+}
+
+@media (min-width: 1024px) {
+  .fields {
+    margin-top: 36px;
+  }
+}
+
+/* ── Remember / Forgot row ───────────────────────────────────── */
+.rememberRow {
+  margin-top: 18px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+@media (min-width: 1024px) {
+  .rememberRow {
+    margin-top: 22px;
+    font-size: 12px;
+  }
+}
+
+/* ── Forgot link ─────────────────────────────────────────────── */
+.forgotLink {
+  color: var(--gold);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+/* ── Or divider ──────────────────────────────────────────────── */
+.divider {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 12px;
+  margin: 22px 0 14px;
+}
+
+@media (min-width: 1024px) {
+  .divider {
+    gap: 16px;
+    margin: 28px 0 18px;
+  }
+}
+
+.orText {
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.errorText {
+  margin: 0 0 14px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--danger);
+}

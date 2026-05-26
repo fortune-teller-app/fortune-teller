@@ -1,0 +1,67 @@
+/* ============================================================
+   BottomNav — CSS Module
+   Overrides position: absolute from global .bottom-nav.
+   ============================================================ */
+
+/* Use element+class to beat .bottom-nav single-class specificity */
+nav.nav {
+  position: fixed;
+}
+
+/* Desktop: centered pill, horizontal layout — desktop-styles.css */
+@media (min-width: 1024px) {
+  nav.nav {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    bottom: 28px;
+    border-radius: 999px;
+    padding: 10px 12px;
+    gap: 6px;
+    justify-content: flex-start;
+    box-shadow: 0 20px 60px -20px rgba(0,0,0,0.8);
+  }
+
+  nav.nav button,
+  nav.nav a {
+    flex: none;
+    flex-direction: row;
+    gap: 10px;
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    transition: 160ms;
+  }
+
+  nav.nav button:hover,
+  nav.nav a:hover {
+    color: var(--ink);
+  }
+
+  /* suppress the mobile ::before dot — desktop uses ic-dot span instead */
+  nav.nav button:global(.active)::before,
+  nav.nav a:global(.active)::before {
+    display: none;
+  }
+
+  nav.nav button:global(.active),
+  nav.nav a:global(.active) {
+    background: rgba(217,164,65,0.08);
+  }
+
+  nav.nav button :global(.ic-dot),
+  nav.nav a :global(.ic-dot) {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: transparent;
+    flex-shrink: 0;
+  }
+
+  nav.nav button:global(.active) :global(.ic-dot),
+  nav.nav a:global(.active) :global(.ic-dot) {
+    background: var(--gold);
+    box-shadow: 0 0 10px var(--gold);
+  }
+}
