@@ -228,6 +228,25 @@ The development environment is considered ready when:
 
 ---
 
+# Test Users
+
+Use the following test accounts to explore the application.
+
+| User | Email | Password | Plan |
+|------|-------|----------|------|
+| **Liora Vance** | `liora@example.com` | `seeker123` | Free |
+| **Fiora Vance** | `fiora@example.com` | `oracle123` | Oracle |
+
+Log in with either account to compare the **Free** and **Oracle** experiences.
+
+Authentication is handled using an **HTTP-only cookie** (`mock_user_id`), allowing the user session to persist across page refreshes within the current browser session.
+
+> **Note**
+>
+> Registered users are stored **in memory only** for the current server session. Any users created during testing will be removed when the development server is restarted.
+
+---
+
 # License
 
 This project is licensed under the MIT License.
