@@ -1,25 +1,36 @@
-import { getMockUserId } from '../mock-backend/session';
-import { MOCK_USERS } from '../mock-backend/users';
-import { getCurrentSubscriptionSummary } from './billing';
+'use server';
 
-const MOCK_DELAY = 150;
+import { http } from './_http';
+import { getAuthToken } from './auth';
 
-function wait(ms = MOCK_DELAY) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+function firstNameOf(name) {
+  return name?.trim().split(' ')[0] ?? '';
 }
 
-export async function getCurrentProfile() {
-  await wait();
+function avatarInitialOf(name) {
+  return name?.trim()?.[0]?.toUpperCase() ?? '?';
+}
 
-  // TODO: Replace with http.get('/profile/me').
-  const userId = await getMockUserId();
-  const user = MOCK_USERS.find(item => item.id === userId) ?? MOCK_USERS[0];
-  const subscription = await getCurrentSubscriptionSummary(user.id);
+function formatBirthPlace(city, country) {
+  return [city, country].filter(Boolean).join(', ') || null;
+}
 
-  const { password: _password, ...safeUser } = user;
+function normalizeProfile(profile) {
+  const { subscription } = profile;
 
   return {
-    ...safeUser,
+    id: profile.id,
+    firstName: firstNameOf(profile.name),
+    fullName: profile.name,
+    avatarInitial: avatarInitialOf(profile.name),
+    email: profile.email,
+    birthDate: profile.birthDate,
+    birthTime: profile.birthTime,
+    birthPlace: formatBirthPlace(profile.birthCity, profile.birthCountry),
+    roleLabel: 'Seeker',
+    sunSign: profile.zodiacSign ?? 'Unknown',
+    risingSign: profile.risingSign ?? 'Unknown',
+    joinedAt: profile.joinedAt,
     subscription,
     subscriptionLabel: subscription.planName,
     subscriptionStatus: subscription.statusLabel,
@@ -27,12 +38,14 @@ export async function getCurrentProfile() {
   };
 }
 
-export async function updateProfile(data) {
-  await wait();
+export async function getCurrentProfile() {
+  const token = await getAuthToken();
+  const { profile } = await http.get('/profile/me', { token });
+  return normalizeProfile(profile);
+}
 
-  // TODO: Replace with http.put('/profile/me', data).
-  const userId = await getMockUserId();
-  const user = MOCK_USERS.find(item => item.id === userId) ?? MOCK_USERS[0];
-  const { password: _password, ...safeUser } = user;
-  return { ...safeUser, ...data };
+export async function updateProfile(updates) {
+  const token = await getAuthToken();
+  const { profile } = await http.patch('/profile', updates, { token });
+  return normalizeProfile(profile);
 }

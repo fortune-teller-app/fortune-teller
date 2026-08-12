@@ -2,13 +2,15 @@ import { Children } from 'react';
 import { Icon } from '../../decorations';
 import styles from './SettingsRow.module.css';
 
-export function SettingsRow({ icon, label, value, danger }) {
+export function SettingsRow({ icon, label, value, danger, onClick, disabled }) {
   return (
     <button
       className={`
         ${styles.row}
         ${danger ? styles.rowDanger : ''}
       `}
+      onClick={onClick}
+      disabled={disabled}
     >
       <span className={`icon-circle w-8 h-8 lg:w-9 lg:h-9 ${danger ? styles.iconDanger : ''}`}>
         <Icon

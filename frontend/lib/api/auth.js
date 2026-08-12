@@ -1,12 +1,12 @@
 'use server';
 
+import { cookies } from 'next/headers';
+import { http } from './_http';
 import { AUTH_ERRORS, MOCK_FORGOT_PASSWORD_RESPONSE } from '../mock-backend/auth';
-import { setMockSession, clearMockSession } from '../mock-backend/session';
-import { MOCK_USERS } from '../mock-backend/users';
-import { MOCK_PREFERENCES } from '../mock-backend/preferences';
-import { MOCK_SUBSCRIPTIONS } from '../mock-backend/billing';
+import { clearMockSession } from '../mock-backend/session';
 
 const MOCK_DELAY = 450;
+const TOKEN_COOKIE = 'ft_auth_token';
 
 function wait(ms = MOCK_DELAY) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -22,78 +22,37 @@ function isValidEmail(email) {
   return typeof email === 'string' && /\S+@\S+\.\S+/.test(email);
 }
 
+async function setAuthToken(token) {
+  const cookieStore = await cookies();
+  cookieStore.set(TOKEN_COOKIE, token, {
+    httpOnly: true,
+    sameSite: 'lax',
+    path: '/',
+  });
+}
+
+async function clearAuthToken() {
+  const cookieStore = await cookies();
+  cookieStore.delete(TOKEN_COOKIE);
+}
+
+export async function getAuthToken() {
+  const cookieStore = await cookies();
+  return cookieStore.get(TOKEN_COOKIE)?.value ?? null;
+}
+
 export async function loginUser({ email, password, remember }) {
-  await wait();
-
-  // TODO: Replace with http.post('/auth/login', { email, password, remember }) and remove mock validation.
-  if (!isValidEmail(email)) throw authError(AUTH_ERRORS.INVALID_EMAIL);
-  if (!password) throw authError(AUTH_ERRORS.MISSING_PASSWORD);
-
-  const user = MOCK_USERS.find(u => u.email.toLowerCase() === email.toLowerCase());
-  if (!user || user.password !== password) throw authError(AUTH_ERRORS.INVALID_CREDENTIALS);
-
-  await setMockSession(user.id);
-
-  return {
-    token: 'mock-session-token',
-    remember: Boolean(remember),
-    user: { id: user.id, name: user.fullName, email: user.email },
-  };
+  const { token, user } = await http.post('/auth/login', { email, password });
+  await setAuthToken(token);
+  return { token, remember: Boolean(remember), user };
 }
 
 export async function registerUser({ name, birthDate, birthTime, birthPlace, email, password }) {
-  await wait();
-
-  // TODO: Replace with http.post('/auth/register', payload) and remove mock user creation.
-  if (!name?.trim()) throw authError(AUTH_ERRORS.MISSING_NAME);
-  if (!birthDate?.trim()) throw authError(AUTH_ERRORS.MISSING_BIRTH_DATE);
-  if (!isValidEmail(email)) throw authError(AUTH_ERRORS.INVALID_EMAIL);
-  if (!password || password.length < 8) throw authError(AUTH_ERRORS.WEAK_PASSWORD);
-
-  const newUser = {
-    id: `user_reg_${Date.now()}`,
-    firstName: name.trim().split(' ')[0],
-    fullName: name.trim(),
-    avatarInitial: name.trim()[0].toUpperCase(),
-    email,
-    password,
-    birthDate,
-    birthTime: birthTime || null,
-    birthPlace: birthPlace || null,
-    roleLabel: 'Seeker',
-    sunSign: 'Unknown',
-    risingSign: 'Unknown',
-    joinedAt: new Date().toISOString().slice(0, 10),
-    subscriptionId: `sub_reg_${Date.now()}`,
-  };
-
-  MOCK_USERS.push(newUser);
-
-  MOCK_PREFERENCES.push({
-    userId: newUser.id,
-    dailyReminderEnabled: false,
-    dailyReminderTime: '07:00',
-    dailyReminderDays: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
-    marketingEmails: false,
+  const { token, user } = await http.post('/auth/register', {
+    name, birthDate, birthTime, birthPlace, email, password,
   });
-
-  MOCK_SUBSCRIPTIONS.push({
-    id: newUser.subscriptionId,
-    userId: newUser.id,
-    planId: 'seeker',
-    status: 'free',
-    statusLabel: 'Free membership',
-    startedAt: newUser.joinedAt,
-    renewsAt: null,
-    paymentSummary: 'No payment method',
-  });
-
-  await setMockSession(newUser.id);
-
-  return {
-    token: 'mock-session-token',
-    user: { id: newUser.id, name: newUser.fullName, email: newUser.email, profileComplete: false },
-  };
+  await setAuthToken(token);
+  return { token, user: { ...user, profileComplete: false } };
 }
 
 export async function forgotPassword(email) {
@@ -105,9 +64,19 @@ export async function forgotPassword(email) {
 }
 
 export async function logoutUser() {
-  await wait(200);
-
-  // TODO: Replace with http.post('/auth/logout').
+  await clearAuthToken();
   await clearMockSession();
   return { ok: true };
+}
+
+export async function getAuthenticatedUser() {
+  const token = await getAuthToken();
+  if (!token) return null;
+
+  try {
+    const { user } = await http.get('/auth/me', { token });
+    return user;
+  } catch {
+    return null;
+  }
 }

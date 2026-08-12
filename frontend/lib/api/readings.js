@@ -1,5 +1,7 @@
 import { MOCK_READINGS } from '../mock-backend/readings';
 import { getMockUserId } from '../mock-backend/session';
+import { http } from './_http';
+import { getAuthToken } from './auth';
 
 const MOCK_DELAY = 150;
 
@@ -46,18 +48,12 @@ export async function getLatestReadings({ userId, limit = 3 } = {}) {
   return history.items;
 }
 
-export async function getReadingStats({ userId } = {}) {
-  await wait();
+export async function getReadingStats() {
+  // Stats are always for the authenticated session — no caller may pass a userId to select someone else's data.
+  const token = await getAuthToken();
+  const { stats } = await http.get('/profile/stats', { token });
 
-  // TODO: Replace with http.get('/readings/stats').
-  const resolvedId = userId ?? await getMockUserId();
-  const readings = MOCK_READINGS.filter(r => r.userId === resolvedId);
-  const byPractice = readings.reduce((acc, r) => {
-    acc[r.practice] = (acc[r.practice] ?? 0) + 1;
-    return acc;
-  }, {});
-
-  const mostRead = Object.entries(byPractice)
+  const mostRead = Object.entries(stats.mostRead)
     .sort((a, b) => b[1] - a[1])
     .map(([practice, count]) => {
       const meta = PRACTICE_META[practice] ?? PRACTICE_META.tarot;
@@ -66,14 +62,14 @@ export async function getReadingStats({ userId } = {}) {
         label: meta.label,
         icon: meta.icon,
         count,
-        pct: readings.length ? Math.round((count / readings.length) * 100) : 0,
+        pct: stats.totalReadings ? Math.round((count / stats.totalReadings) * 100) : 0,
       };
     });
 
   return {
-    totalReadings: readings.length,
-    dreamCount: byPractice.dream ?? 0,
-    daysKept: 184,
+    totalReadings: stats.totalReadings,
+    dreamCount: stats.dreamCount,
+    daysKept: stats.daysKept,
     mostRead,
   };
 }

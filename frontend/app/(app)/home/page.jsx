@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Icon } from '../../../components/decorations';
-import { getCurrentProfile } from '../../../lib/api/profile';
+import { getAuthenticatedUser } from '../../../lib/api/auth';
 import { getLatestReadings } from '../../../lib/api/readings';
 import GreetingClient from './GreetingClient';
 import styles from './home.module.css';
@@ -50,10 +50,11 @@ function FeaturedCardDecoration() {
 }
 
 export default async function Dashboard() {
-  const [profile, recentReadings] = await Promise.all([
-    getCurrentProfile(),
+  const [user, recentReadings] = await Promise.all([
+    getAuthenticatedUser(),
     getLatestReadings({ limit: 3 }),
   ]);
+  const firstName = user?.name?.trim().split(' ')[0] || 'Seeker';
 
   return (
     <div className={`screen-fade ${styles.screen}`}>
@@ -81,7 +82,7 @@ export default async function Dashboard() {
 
       <div className="content-wrap">
 
-        <GreetingClient firstName={profile.firstName} />
+        <GreetingClient firstName={firstName} />
 
         <div className={`section ${styles.practiceSection}`}>
           <div className="section-h">

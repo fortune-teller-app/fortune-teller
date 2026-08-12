@@ -80,22 +80,26 @@ export default async function Profile() {
           </div>
 
           <div className={`card ${styles.readCard}`}>
-            {stats.mostRead.map((r, i) => (
-              <div key={r.practice} className={`${styles.readRow} ${i > 0 ? styles.readBorder : ''}`}>
-                <span className="icon-circle w-8 h-8 lg:w-10 lg:h-10">
-                  <Icon name={r.icon} size={14} color="var(--gold)" />
-                </span>
+            {stats.mostRead.length === 0 ? (
+              <div className={`muter ${styles.readEmpty}`}>No readings yet — your practice history will appear here.</div>
+            ) : (
+              stats.mostRead.map((r, i) => (
+                <div key={r.practice} className={`${styles.readRow} ${i > 0 ? styles.readBorder : ''}`}>
+                  <span className="icon-circle w-8 h-8 lg:w-10 lg:h-10">
+                    <Icon name={r.icon} size={14} color="var(--gold)" />
+                  </span>
 
-                <div className="flex-1">
-                  <div className={`serif ${styles.readName}`}>{r.label}</div>
-                  <div className={styles.barTrack}>
-                    <div className={styles.barFill} style={{ width: `${r.pct}%` }} />
+                  <div className="flex-1">
+                    <div className={`serif ${styles.readName}`}>{r.label}</div>
+                    <div className={styles.barTrack}>
+                      <div className={styles.barFill} style={{ width: `${r.pct}%` }} />
+                    </div>
                   </div>
-                </div>
 
-                <div className={`serif-i ${styles.readCount}`}>{r.count}</div>
-              </div>
-            ))}
+                  <div className={`serif-i ${styles.readCount}`}>{r.count}</div>
+                </div>
+              ))
+            )}
           </div>
         </div>
 

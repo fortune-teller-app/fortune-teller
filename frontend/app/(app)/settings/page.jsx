@@ -2,6 +2,8 @@ import { BackButton, SettingsRow, SettingsGroup } from '../../../components/ui';
 import { getCurrentProfile } from '../../../lib/api/profile';
 import { getCurrentPreferences } from '../../../lib/api/preferences';
 import NotificationToggleRow from './NotificationToggleRow';
+import SignOutRow from './SignOutRow';
+import EditableRow from './EditableRow';
 import styles from './settings.module.css';
 
 function formatBirthDate(date) {
@@ -36,10 +38,10 @@ export default async function Settings() {
         </header>
 
         <SettingsGroup title="Account">
-          <SettingsRow icon="user"     label="Name"       value={profile.fullName} />
-          <SettingsRow icon="mail"     label="Email"      value={profile.email} />
-          <SettingsRow icon="calendar" label="Birth date" value={formatBirthDate(profile.birthDate)} />
-          <SettingsRow icon="globe"    label="Birth place" value={profile.birthPlace} />
+          <EditableRow href="/settings/edit/name"        icon="user"     label="Name"        value={profile.fullName} />
+          <EditableRow href="/settings/edit/email"       icon="mail"     label="Email"       value={profile.email} />
+          <EditableRow href="/settings/edit/birth-date"  icon="calendar" label="Birth date"  value={formatBirthDate(profile.birthDate)} />
+          <EditableRow href="/settings/edit/birth-place" icon="globe"    label="Birth place" value={profile.birthPlace} />
         </SettingsGroup>
 
         <SettingsGroup title="Notifications">
@@ -63,7 +65,7 @@ export default async function Settings() {
 
         <SettingsGroup title="Account actions">
           <SettingsRow icon="diamond" label="Manage plan" value={`${profile.subscription.planName} · ${profile.subscription.statusLabel}`} />
-          <SettingsRow icon="logout"  label="Sign out" />
+          <SignOutRow />
           <SettingsRow icon="x"       label="Delete account" danger />
         </SettingsGroup>
 
