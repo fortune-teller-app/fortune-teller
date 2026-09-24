@@ -341,3 +341,26 @@ CREATE TABLE user_activity_metric (
 );
 
 ALTER TABLE user_activity_metric ENABLE ROW LEVEL SECURITY;
+
+-- =====================================================
+-- REVOKED TOKENS
+-- =====================================================
+-- Server-side JWT revocation list. Logging out inserts the
+-- JWT's `jti` here, and `authenticate` rejects any JWT whose
+-- `jti` is present, so a copied token cannot be replayed
+-- before it expires.
+
+CREATE TABLE revoked_tokens (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+
+    jti TEXT NOT NULL UNIQUE,
+    user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+
+    expires_at TIMESTAMPTZ NOT NULL,
+
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX revoked_tokens_expires_at_idx ON revoked_tokens (expires_at);
+
+ALTER TABLE revoked_tokens ENABLE ROW LEVEL SECURITY;

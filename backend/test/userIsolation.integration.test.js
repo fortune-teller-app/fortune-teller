@@ -222,7 +222,9 @@ test('reading statistics are scoped to the authenticated user', async () => {
   assert.equal(res.body.stats.dreamCount, 1);
   assert.deepEqual(res.body.stats.mostRead, { tarot: 2 });
 
-  const statsCalls = supabase.calls.slice(callsBefore);
+  // authenticate's revocation lookup is keyed by jti, not user data.
+  const statsCalls = supabase.calls.slice(callsBefore)
+    .filter((call) => call.table !== 'revoked_tokens');
   assert.deepEqual(statsCalls.map((call) => call.table), [
     'users',
     'reading_session',

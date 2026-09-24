@@ -26,6 +26,15 @@ async function login(req, res) {
   }
 }
 
+async function logout(req, res) {
+  try {
+    await authService.revokeToken(req.auth.payload);
+    res.status(200).json({ message: "Logged out successfully." });
+  } catch (err) {
+    handleAuthError(res, err);
+  }
+}
+
 async function me(req, res) {
   try {
     const user = await authService.getUserById(req.user.id);
@@ -35,4 +44,4 @@ async function me(req, res) {
   }
 }
 
-module.exports = { register, login, me };
+module.exports = { register, login, logout, me };
