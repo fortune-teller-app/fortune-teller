@@ -15,6 +15,8 @@ export default function SignOutRow() {
 
     try {
       await logoutUser();
+    } catch {
+      // Redirect even if cleanup was already completed or the cookie is stale.
     } finally {
       router.replace('/login');
     }

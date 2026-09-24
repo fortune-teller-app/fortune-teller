@@ -123,6 +123,47 @@ Runs on:
 http://localhost:5001
 ```
 
+## Automated Tests
+
+Run the login and session tests from each application directory:
+
+```bash
+cd backend
+npm test
+
+cd ../frontend
+npm test
+```
+
+The suite covers successful and failed login, registration persistence and rollback,
+JWT validation, frontend cookie creation/removal, remembered sessions, logout behavior,
+and authenticated-user data isolation.
+
+## CI/CD
+
+`.github/workflows/ci-cd.yml` runs the backend tests, frontend tests, and a production
+frontend build for pull requests and pushes to `main`.
+
+After those checks pass on `main`, the workflow deploys the frontend to Vercel when
+these GitHub Actions repository secrets are configured:
+
+- `VERCEL_TOKEN`
+- `VERCEL_ORG_ID`
+- `VERCEL_PROJECT_ID`
+
+If the secrets are not present, CI still runs and the deployment step is safely skipped.
+The backend deployment target is intentionally left unconfigured until a backend host is selected.
+
+Pushes to `main` and manually triggered workflows also run the live backend integration
+suite when these dedicated test-project secrets are configured:
+
+- `SUPABASE_URL`
+- `SUPABASE_ANON_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `JWT_SECRET`
+
+The live suite creates uniquely named QA records and removes them before exiting.
+
 ---
 
 # Environment Variables

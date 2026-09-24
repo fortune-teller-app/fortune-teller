@@ -78,3 +78,22 @@ npm start
 ```
 
 The server starts on `http://localhost:<PORT>` (default `5000`).
+
+## Testing
+
+Run the credential-free unit and authorization tests with:
+
+```bash
+npm test
+```
+
+Run the complete API and persistence workflow against a dedicated Supabase test
+project with:
+
+```bash
+npm run test:integration
+```
+
+The live suite reads `backend/.env`, creates uniquely named QA users, tests real
+database persistence and cross-user isolation, and deletes all generated records
+before exiting. Do not run it against a production Supabase project.

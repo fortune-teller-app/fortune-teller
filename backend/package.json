@@ -6,7 +6,10 @@
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
-    "dev": "nodemon src/server.js"
+    "dev": "nodemon src/server.js",
+    "test": "node --test test/*.test.js",
+    "test:integration": "node --test test-live/*.live.test.js",
+    "test:watch": "node --test --watch test/*.test.js"
   },
   "engines": {
     "node": ">=18"

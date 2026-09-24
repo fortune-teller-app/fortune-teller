@@ -7,6 +7,7 @@ import { clearMockSession } from '../mock-backend/session';
 
 const MOCK_DELAY = 450;
 const TOKEN_COOKIE = 'ft_auth_token';
+const REMEMBER_SESSION_SECONDS = 60 * 60 * 24 * 7;
 
 function wait(ms = MOCK_DELAY) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -22,13 +23,17 @@ function isValidEmail(email) {
   return typeof email === 'string' && /\S+@\S+\.\S+/.test(email);
 }
 
-async function setAuthToken(token) {
+async function setAuthToken(token, remember = false) {
   const cookieStore = await cookies();
-  cookieStore.set(TOKEN_COOKIE, token, {
+  const options = {
     httpOnly: true,
     sameSite: 'lax',
+    secure: process.env.NODE_ENV === 'production',
     path: '/',
-  });
+  };
+
+  if (remember) options.maxAge = REMEMBER_SESSION_SECONDS;
+  cookieStore.set(TOKEN_COOKIE, token, options);
 }
 
 async function clearAuthToken() {
@@ -43,8 +48,8 @@ export async function getAuthToken() {
 
 export async function loginUser({ email, password, remember }) {
   const { token, user } = await http.post('/auth/login', { email, password });
-  await setAuthToken(token);
-  return { token, remember: Boolean(remember), user };
+  await setAuthToken(token, remember);
+  return { remember: Boolean(remember), user };
 }
 
 export async function registerUser({ name, birthDate, birthTime, birthPlace, email, password }) {
@@ -52,7 +57,7 @@ export async function registerUser({ name, birthDate, birthTime, birthPlace, ema
     name, birthDate, birthTime, birthPlace, email, password,
   });
   await setAuthToken(token);
-  return { token, user: { ...user, profileComplete: false } };
+  return { user: { ...user, profileComplete: false } };
 }
 
 export async function forgotPassword(email) {
