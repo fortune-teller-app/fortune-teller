@@ -69,8 +69,15 @@ export async function forgotPassword(email) {
 }
 
 export async function logoutUser() {
-  await clearAuthToken();
-  await clearMockSession();
+  const token = await getAuthToken();
+
+  try {
+    // Revoke the JWT server-side so a copied token cannot be replayed.
+    if (token) await http.post('/auth/logout', null, { token });
+  } finally {
+    await clearAuthToken();
+    await clearMockSession();
+  }
   return { ok: true };
 }
 

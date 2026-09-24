@@ -123,6 +123,27 @@ describe('frontend authentication actions', () => {
     expect(mocks.clearMockSession).toHaveBeenCalledOnce();
   });
 
+  it('revokes the JWT on the server before clearing the session', async () => {
+    mocks.cookieStore.get.mockReturnValue({ value: 'secret-jwt' });
+    mocks.http.post.mockResolvedValue({ message: 'Logged out successfully.' });
+
+    await expect(logoutUser()).resolves.toEqual({ ok: true });
+
+    expect(mocks.http.post).toHaveBeenCalledWith('/auth/logout', null, { token: 'secret-jwt' });
+    expect(mocks.cookieStore.delete).toHaveBeenCalledWith('ft_auth_token');
+    expect(mocks.clearMockSession).toHaveBeenCalledOnce();
+  });
+
+  it('still clears the local session when server-side revocation fails', async () => {
+    mocks.cookieStore.get.mockReturnValue({ value: 'secret-jwt' });
+    mocks.http.post.mockRejectedValue(new Error('Could not log out.'));
+
+    await expect(logoutUser()).rejects.toThrow('Could not log out.');
+
+    expect(mocks.cookieStore.delete).toHaveBeenCalledWith('ft_auth_token');
+    expect(mocks.clearMockSession).toHaveBeenCalledOnce();
+  });
+
   it('loads the current user with the cookie token', async () => {
     const user = { id: 'user-a', name: 'Aurora', email: 'aurora@example.com' };
     mocks.cookieStore.get.mockReturnValue({ value: 'secret-jwt' });
