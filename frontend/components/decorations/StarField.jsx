@@ -27,15 +27,15 @@ export default function StarField({ density = 'med', seed = 7 }) {
     >
       <defs>
         <radialGradient id="bg-glow-a" cx="80%" cy="0%" r="60%">
-          <stop offset="0%" stopColor="rgba(217,164,65,0.18)" />
-          <stop offset="100%" stopColor="rgba(217,164,65,0)" />
+          <stop offset="0%" style={{ stopColor: 'var(--starfield-glow-a)', stopOpacity: 'var(--starfield-glow-a-o)' }} />
+          <stop offset="100%" style={{ stopColor: 'var(--starfield-glow-a)', stopOpacity: 0 }} />
         </radialGradient>
         <radialGradient id="bg-glow-b" cx="10%" cy="80%" r="70%">
-          <stop offset="0%" stopColor="rgba(91,71,180,0.25)" />
-          <stop offset="100%" stopColor="rgba(91,71,180,0)" />
+          <stop offset="0%" style={{ stopColor: 'var(--starfield-glow-b)', stopOpacity: 'var(--starfield-glow-b-o)' }} />
+          <stop offset="100%" style={{ stopColor: 'var(--starfield-glow-b)', stopOpacity: 0 }} />
         </radialGradient>
       </defs>
-      <rect width="100%" height="100%" fill="#060512" />
+      <rect width="100%" height="100%" style={{ fill: 'var(--starfield-base)' }} />
       <rect width="100%" height="100%" fill="url(#bg-glow-a)" />
       <rect width="100%" height="100%" fill="url(#bg-glow-b)" />
       {stars.map((s, i) => (
@@ -44,7 +44,7 @@ export default function StarField({ density = 'med', seed = 7 }) {
           cx={`${s.x}%`}
           cy={`${s.y}%`}
           r={s.r}
-          fill="#F8F1E4"
+          style={{ fill: 'var(--star-color)' }}
           opacity={s.o}
           className={`twinkle${s.tw === 1 ? ' b' : s.tw === 2 ? ' c' : ''}`}
         />

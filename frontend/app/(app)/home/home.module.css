@@ -70,7 +70,7 @@
 }
 
 .bellBtn:hover {
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--tint-hover);
 }
 
 .notifDot {
@@ -80,7 +80,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--gold);
+  background: var(--gold-fill);
   box-shadow: 0 0 10px rgba(217, 164, 65, 0.6);
 }
 
@@ -173,9 +173,7 @@
   grid-column: span 2;
   min-height: 165px;
   border-color: var(--gold-line);
-  background:
-    radial-gradient(120% 90% at 85% 0%, rgba(217,164,65,0.14), transparent 55%),
-    linear-gradient(180deg, rgba(27,20,61,0.92), rgba(18,13,45,0.92));
+  background: var(--featured-card-bg);
 }
 
 @media (min-width: 700px) {
@@ -194,9 +192,7 @@
 .featuredGlow {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(circle at 15% 20%, rgba(217,164,65,0.12), transparent 32%),
-    radial-gradient(circle at 90% 10%, rgba(217,164,65,0.10), transparent 36%);
+  background: var(--featured-glow);
   pointer-events: none;
 }
 

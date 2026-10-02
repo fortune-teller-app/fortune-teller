@@ -36,7 +36,7 @@
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  background: linear-gradient(180deg, var(--gold), #b88838);
+  background: linear-gradient(180deg, var(--gold-fill), var(--gold-fill-deep));
   box-shadow: 0 0 30px rgba(217, 164, 65, 0.4);
   position: absolute;
 }

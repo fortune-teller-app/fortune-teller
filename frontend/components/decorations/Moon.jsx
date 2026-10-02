@@ -9,7 +9,7 @@ export default function Moon({ size = 32, style }) {
           <circle cx="22" cy="13" r="11" fill="black" />
         </mask>
       </defs>
-      <circle cx="16" cy="16" r="13" fill="#D9A441" mask={`url(#${id})`} />
+      <circle cx="16" cy="16" r="13" style={{ fill: 'var(--deco-fill)' }} mask={`url(#${id})`} />
     </svg>
   );
 }

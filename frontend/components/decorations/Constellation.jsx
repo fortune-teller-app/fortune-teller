@@ -14,12 +14,12 @@ export default function Constellation({ size = 200, style }) {
           key={i}
           x1={stars[a].x} y1={stars[a].y}
           x2={stars[b].x} y2={stars[b].y}
-          stroke="rgba(217,164,65,0.3)" strokeWidth="0.6"
+          style={{ stroke: 'rgba(var(--deco-rgb), calc(0.3 * var(--deco-boost)))' }} strokeWidth="0.6"
         />
       ))}
       {stars.map((s, i) => (
         <circle key={i} cx={s.x} cy={s.y} r={i === 0 ? 2 : 1.2}
-          fill="#D9A441" opacity={i === 0 ? 1 : 0.7} />
+          style={{ fill: 'var(--deco-fill)' }} opacity={i === 0 ? 1 : 0.7} />
       ))}
     </svg>
   );

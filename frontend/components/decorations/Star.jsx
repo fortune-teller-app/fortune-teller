@@ -14,8 +14,7 @@ export default function Star({ size = 14, style, filled = false }) {
     <svg width={size} height={size} viewBox="-7 -7 14 14" style={style} aria-hidden="true">
       <polygon
         points={pts}
-        fill={filled ? '#D9A441' : 'none'}
-        stroke="#D9A441"
+        style={{ fill: filled ? 'var(--deco-fill)' : 'none', stroke: 'var(--deco-fill)' }}
         strokeWidth="0.6"
       />
     </svg>

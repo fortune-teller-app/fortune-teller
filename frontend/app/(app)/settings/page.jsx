@@ -1,4 +1,4 @@
-import { BackButton, SettingsRow, SettingsGroup } from '../../../components/ui';
+import { BackButton, SettingsRow, SettingsGroup, ThemeRow } from '../../../components/ui';
 import { getCurrentProfile } from '../../../lib/api/profile';
 import { getCurrentPreferences } from '../../../lib/api/preferences';
 import NotificationToggleRow from './NotificationToggleRow';
@@ -42,6 +42,10 @@ export default async function Settings() {
           <EditableRow href="/settings/edit/email"       icon="mail"     label="Email"       value={profile.email} />
           <EditableRow href="/settings/edit/birth-date"  icon="calendar" label="Birth date"  value={formatBirthDate(profile.birthDate)} />
           <EditableRow href="/settings/edit/birth-place" icon="globe"    label="Birth place" value={profile.birthPlace} />
+        </SettingsGroup>
+
+        <SettingsGroup title="Appearance">
+          <ThemeRow />
         </SettingsGroup>
 
         <SettingsGroup title="Notifications">

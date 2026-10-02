@@ -1,0 +1,77 @@
+/* ThemeRow — Light | Dark | System segmented control */
+
+.row {
+  margin: 0;
+  min-width: 0;
+  border: 0;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.label { font-size: 16px; line-height: 1.2; }
+.value { font-size: 11px; margin-top: 2px; }
+
+.segments {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.segment { position: relative; display: block; cursor: pointer; }
+
+input.input:focus-visible { outline: none; }
+
+/* Visually hidden native radio keeps keyboard and screen-reader behavior */
+.input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.face {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid var(--control-border);
+  color: var(--ink);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background 160ms, border-color 160ms, color 160ms;
+}
+
+.segment:hover .face { border-color: var(--gold); }
+
+.input:checked + .face {
+  background: var(--gold-fill);
+  border-color: var(--gold-fill);
+  color: var(--on-gold);
+  font-weight: 600;
+}
+
+.input:focus-visible + .face {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+@media (min-width: 1024px) {
+  .row { padding: 18px 22px; }
+  .label { font-size: 18px; }
+  .value { font-size: 12px; margin-top: 3px; }
+  .face { height: 44px; }
+}

@@ -19,7 +19,7 @@ export default function Mandala({ size = 220, style, animate = true }) {
       style={style}
       aria-hidden="true"
     >
-      <g fill="none" stroke="rgba(217,164,65,0.28)" strokeWidth="0.5">
+      <g fill="none" style={{ stroke: 'rgba(var(--deco-rgb), calc(0.28 * var(--deco-boost)))' }} strokeWidth="0.5">
         <circle r={Math.max(0, r - 4)} />
         <circle r={Math.max(0, r - 24)} />
         <circle r={Math.max(0, r - 56)} strokeDasharray="2 4" />
@@ -27,7 +27,7 @@ export default function Mandala({ size = 220, style, animate = true }) {
       </g>
       <g
         className={animate ? 'orbit-anim slow' : ''}
-        stroke="rgba(217,164,65,0.5)"
+        style={{ stroke: 'rgba(var(--deco-rgb), calc(0.5 * var(--deco-boost)))' }}
         strokeWidth="0.6"
       >
         {Array.from({ length: ticks }).map((_, i) => {
@@ -56,17 +56,17 @@ export default function Mandala({ size = 220, style, animate = true }) {
               key={i}
               cx={x} cy={y}
               r={i % 3 === 0 ? 1.8 : 1}
-              fill="#D9A441"
+              style={{ fill: 'var(--deco-fill)' }}
               opacity={i % 3 === 0 ? 1 : 0.5}
             />
           );
         })}
       </g>
-      <g stroke="rgba(217,164,65,0.35)" strokeWidth="0.5" fill="none">
+      <g style={{ stroke: 'rgba(var(--deco-rgb), calc(0.35 * var(--deco-boost)))' }} strokeWidth="0.5" fill="none">
         <polygon points={pointsFor(6, r - 28)} />
         <polygon points={pointsFor(6, r - 28)} transform="rotate(30)" />
       </g>
-      <circle r={3} fill="#D9A441" />
+      <circle r={3} style={{ fill: 'var(--deco-fill)' }} />
     </svg>
   );
 }

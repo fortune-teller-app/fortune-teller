@@ -22,7 +22,7 @@ export default function OrbitRings({ density = 'med' }) {
               rx={rx}
               ry={r4(rx * 0.62)}
               fill="none"
-              stroke="rgba(217,164,65,0.10)"
+              style={{ stroke: 'rgba(var(--deco-rgb), calc(0.10 * var(--deco-boost)))' }}
               strokeWidth="0.6"
               transform={`rotate(${i * 28})`}
             />

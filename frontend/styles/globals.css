@@ -11,21 +11,8 @@
    ============================================================ */
 
 /* ── Design tokens ─────────────────────────────────────────── */
+/* Theme-independent tokens */
 :root {
-  --bg-0: #060512;
-  --bg-1: #0B0820;
-  --bg-2: #120D2D;
-  --card-1: #17113A;
-  --card-2: #1B143D;
-  --gold: #D9A441;
-  --gold-soft: #c08e34;
-  --gold-line: rgba(217, 164, 65, 0.22);
-  --gold-line-soft: rgba(217, 164, 65, 0.10);
-  --on-gold: #1a1208;
-  --danger: #e07664;
-  --ink: #F8F1E4;
-  --ink-2: #A7A0C3;
-  --ink-3: #6e6789;
   --serif: var(--font-cormorant), "Cormorant", "EB Garamond", serif;
   --sans: var(--font-inter), system-ui, -apple-system, sans-serif;
 
@@ -33,6 +20,169 @@
   --content-max: 960px;
   --content-narrow: 720px;
   --pad-x: 56px;
+}
+
+/* Theme tokens — Dark (default). `.tarot` re-applies them so tarot cards
+   stay dark inside a light page. [data-theme] is set on <html>; see
+   lib/theme.js and components/theme/. */
+:root,
+.tarot {
+  color-scheme: dark;
+
+  /* Surfaces */
+  --bg-0: #060512;
+  --bg-1: #0B0820;
+  --bg-2: #120D2D;
+  --card-1: #17113A;
+  --card-2: #1B143D;
+  --page-base: #050410;
+  --page-bg-app:
+    radial-gradient(1100px 700px at 80% -10%, rgba(217,164,65,0.06), transparent 60%),
+    radial-gradient(900px 700px at -10% 30%, rgba(91,71,180,0.10), transparent 60%),
+    radial-gradient(1200px 900px at 50% 110%, rgba(28,18,70,0.70), transparent 60%),
+    #050410;
+  --page-bg-auth:
+    radial-gradient(900px 700px at -10% 30%, rgba(91,71,180,0.10), transparent 60%),
+    radial-gradient(1200px 900px at 50% 110%, rgba(28,18,70,0.70), transparent 60%),
+    #050410;
+  --card-bg: linear-gradient(180deg, rgba(27,20,61,0.85), rgba(18,13,45,0.85));
+  --card-glass-bg: rgba(23, 17, 58, 0.45);
+  --card-shadow: none;
+  --nav-bg: rgba(11, 8, 32, 0.7);
+  --nav-shadow: none;
+  --nav-shadow-desktop: 0 20px 60px -20px rgba(0,0,0,0.8);
+  --avatar-bg: linear-gradient(180deg, #2a205a, #160e3a);
+
+  /* Gold: --gold is for text, icons and borders; --gold-fill is for solid
+     fills that carry dark (--on-gold) content. Equal in Dark. */
+  --gold: #D9A441;
+  --gold-soft: #c08e34;
+  --gold-fill: #D9A441;
+  --gold-fill-hover: #e6b55a;
+  --gold-fill-deep: #b88838;
+  --gold-line: rgba(217, 164, 65, 0.22);
+  --gold-line-soft: rgba(217, 164, 65, 0.10);
+  --on-gold: #1a1208;
+  --danger: #e07664;
+  --danger-line: rgba(224,118,100,0.4);
+  --danger-line-soft: rgba(224,118,100,0.3);
+  --danger-tint: rgba(224,118,100,0.08);
+
+  /* Text */
+  --ink: #F8F1E4;
+  --ink-2: #A7A0C3;
+  --ink-3: #6e6789;
+  --placeholder: rgba(167, 160, 195, 0.4);
+
+  /* Controls, tints and states */
+  --control-border: var(--gold-line);
+  --field-border: var(--gold-line-soft);
+  --focus-ring: #D9A441;
+  --track-off: rgba(247, 240, 228, 0.1);
+  --track-ring: 0 0 0 0 transparent;
+  --dots-off: rgba(247, 240, 228, 0.15);
+  --tint-hover: rgba(255, 255, 255, 0.04);
+  --tint-gold: rgba(217, 164, 65, 0.08);
+  --tint-gold-track: rgba(217, 164, 65, 0.12);
+  --selected-bg: linear-gradient(180deg, rgba(217,164,65,0.10), rgba(18,13,45,0.85));
+  --highlight-bg: linear-gradient(180deg, rgba(217,164,65,0.10), rgba(217,164,65,0.02));
+  --featured-card-bg:
+    radial-gradient(120% 90% at 85% 0%, rgba(217,164,65,0.14), transparent 55%),
+    linear-gradient(180deg, rgba(27,20,61,0.92), rgba(18,13,45,0.92));
+  --featured-glow:
+    radial-gradient(circle at 15% 20%, rgba(217,164,65,0.12), transparent 32%),
+    radial-gradient(circle at 90% 10%, rgba(217,164,65,0.10), transparent 36%);
+  --scroll-thumb: rgba(217,164,65,0.12);
+  --scroll-thumb-hover: rgba(217,164,65,0.24);
+
+  /* Decorations (StarField, OrbitRings, Mandala, Constellation, Star, Sun, Moon) */
+  --deco-rgb: 217, 164, 65;
+  --deco-boost: 1;
+  --deco-fill: #D9A441;
+  --star-color: #F8F1E4;
+  --starfield-base: #060512;
+  --starfield-glow-a: rgb(217, 164, 65);
+  --starfield-glow-a-o: 0.18;
+  --starfield-glow-b: rgb(91, 71, 180);
+  --starfield-glow-b-o: 0.25;
+}
+
+/* Theme tokens — Light: warm ivory, deep indigo, darker gold for text.
+   Contrast (on #FBF7EE): ink 14:1, ink-2 8:1, ink-3 5:1, gold 5.5:1,
+   danger 5.6:1, control-border 4.6:1. */
+[data-theme="light"] {
+  color-scheme: light;
+
+  --bg-0: #FBF7EE;
+  --bg-1: #F6F0E2;
+  --bg-2: #F0E8D6;
+  --card-1: #FFFFFF;
+  --card-2: #FFFCF5;
+  --page-base: #FBF7EE;
+  --page-bg-app:
+    radial-gradient(1100px 700px at 80% -10%, rgba(217,164,65,0.22), transparent 60%),
+    radial-gradient(900px 700px at -10% 30%, rgba(91,71,180,0.08), transparent 60%),
+    radial-gradient(1200px 900px at 50% 110%, rgba(217,164,65,0.14), transparent 60%),
+    #FBF7EE;
+  --page-bg-auth:
+    radial-gradient(900px 700px at -10% 30%, rgba(91,71,180,0.08), transparent 60%),
+    radial-gradient(1200px 900px at 50% 110%, rgba(217,164,65,0.14), transparent 60%),
+    #FBF7EE;
+  --card-bg: linear-gradient(180deg, #FFFFFF, #FFFCF5);
+  --card-glass-bg: rgba(255, 255, 255, 0.82);
+  --card-shadow: 0 1px 2px rgba(60,40,10,0.06), 0 10px 28px -14px rgba(60,40,10,0.22);
+  --nav-bg: rgba(255, 253, 248, 0.94);
+  --nav-shadow: 0 8px 28px -12px rgba(60,40,10,0.35);
+  --nav-shadow-desktop: 0 16px 44px -18px rgba(60,40,10,0.40);
+  --avatar-bg: linear-gradient(180deg, #FFF3D6, #F1E0B4);
+
+  --gold: #8A5A00;
+  --gold-soft: #6F4A00;
+  --gold-fill: #D9A441;
+  --gold-fill-hover: #C98F22;
+  --gold-fill-deep: #B88838;
+  --gold-line: rgba(138, 90, 0, 0.55);
+  --gold-line-soft: rgba(138, 90, 0, 0.30);
+  --on-gold: #1a1208;
+  --danger: #B03A2E;
+  --danger-line: rgba(176,58,46,0.55);
+  --danger-line-soft: rgba(176,58,46,0.45);
+  --danger-tint: rgba(176,58,46,0.08);
+
+  --ink: #1C1640;
+  --ink-2: #4A4470;
+  --ink-3: #6B6590;
+  --placeholder: #6B6590;
+
+  --control-border: #8A6B2F;
+  --field-border: #8A6B2F;
+  --focus-ring: #3D2E9A;
+  --track-off: #E6DDC8;
+  --track-ring: 0 0 0 1px #8A6B2F;
+  --dots-off: rgba(28, 22, 64, 0.25);
+  --tint-hover: rgba(138, 90, 0, 0.10);
+  --tint-gold: rgba(217, 164, 65, 0.20);
+  --tint-gold-track: rgba(138, 90, 0, 0.20);
+  --selected-bg: linear-gradient(180deg, rgba(217,164,65,0.24), #FFFFFF);
+  --highlight-bg: linear-gradient(180deg, rgba(217,164,65,0.22), rgba(217,164,65,0.06));
+  --featured-card-bg:
+    radial-gradient(120% 90% at 85% 0%, rgba(217,164,65,0.26), transparent 55%),
+    linear-gradient(180deg, #FFFFFF, #FFF8E8);
+  --featured-glow:
+    radial-gradient(circle at 15% 20%, rgba(217,164,65,0.20), transparent 32%),
+    radial-gradient(circle at 90% 10%, rgba(217,164,65,0.16), transparent 36%);
+  --scroll-thumb: rgba(138,90,0,0.30);
+  --scroll-thumb-hover: rgba(138,90,0,0.50);
+
+  --deco-rgb: 138, 90, 0;
+  --deco-boost: 1.7;
+  --deco-fill: #B07A12;
+  --star-color: #5B47B4;
+  --starfield-base: #FBF7EE;
+  --starfield-glow-a: rgb(217, 164, 65);
+  --starfield-glow-a-o: 0.30;
+  --starfield-glow-b: rgb(91, 71, 180);
+  --starfield-glow-b-o: 0.10;
 }
 
 /* ── Base resets ────────────────────────────────────────────── */
@@ -44,7 +194,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  background: #050410;
+  background: var(--page-base);
   color: var(--ink);
   font-family: var(--sans);
   -webkit-font-smoothing: antialiased;
@@ -74,8 +224,24 @@ a { color: inherit; text-decoration: none; }
 /* Scrollbar */
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(217,164,65,0.12); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(217,164,65,0.24); }
+::-webkit-scrollbar-thumb { background: var(--scroll-thumb); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--scroll-thumb-hover); }
+
+/* ── Focus ──────────────────────────────────────────────────── */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+[tabindex]:not([tabindex="-1"]):focus-visible,
+select:focus-visible,
+input[type="checkbox"]:focus-visible,
+input[type="radio"]:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* Text fields are underlined; their focus state is drawn by .field:focus-within */
+.field input:focus-visible,
+.field textarea:focus-visible { outline: none; }
 
 /* ── Typography utilities ───────────────────────────────────── */
 .serif     { font-family: var(--serif); font-weight: 400; }
@@ -103,12 +269,13 @@ a { color: inherit; text-decoration: none; }
   position: relative;
   border-radius: 22px;
   border: 1px solid var(--gold-line-soft);
-  background: linear-gradient(180deg, rgba(27,20,61,0.85), rgba(18,13,45,0.85));
+  background: var(--card-bg);
+  box-shadow: var(--card-shadow);
   overflow: hidden;
 }
 
 .card-glass {
-  background: rgba(23, 17, 58, 0.45);
+  background: var(--card-glass-bg);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-color: var(--gold-line);
@@ -123,11 +290,6 @@ a { color: inherit; text-decoration: none; }
   background: transparent;
   border-color: var(--gold-line);
 }
-
-/* Card style theme switch via root attribute */
-[data-cardstyle="glass"]    .card { background: rgba(23,17,58,0.45); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-color: var(--gold-line); }
-[data-cardstyle="solid"]    .card { background: linear-gradient(180deg, var(--card-1), var(--card-2)); border-color: var(--gold-line-soft); }
-[data-cardstyle="bordered"] .card { background: transparent; border-color: var(--gold-line); }
 
 /* ── Buttons ────────────────────────────────────────────────── */
 .btn {
@@ -146,15 +308,15 @@ a { color: inherit; text-decoration: none; }
   transition: 160ms;
 }
 
-.btn-gold           { background: var(--gold); color: var(--on-gold); }
-.btn-gold:hover     { background: #e6b55a; }
-.btn-ghost          { border: 1px solid var(--gold-line); color: var(--ink); }
+.btn-gold           { background: var(--gold-fill); color: var(--on-gold); }
+.btn-gold:hover     { background: var(--gold-fill-hover); }
+.btn-ghost          { border: 1px solid var(--control-border); color: var(--ink); }
 .btn-ghost:hover    { border-color: var(--gold); color: var(--gold); }
 .btn-block          { width: 100%; }
 
 /* ── Form fields ────────────────────────────────────────────── */
 .field {
-  border-bottom: 1px solid var(--gold-line-soft);
+  border-bottom: 1px solid var(--field-border);
   padding: 18px 0 14px;
   display: flex;
   flex-direction: column;
@@ -180,8 +342,13 @@ a { color: inherit; text-decoration: none; }
 
 .field input::placeholder,
 .field textarea::placeholder {
-  color: rgba(167, 160, 195, 0.4);
+  color: var(--placeholder);
   font-style: italic;
+}
+
+.field:focus-within {
+  border-bottom-color: var(--focus-ring);
+  box-shadow: 0 1px 0 0 var(--focus-ring);
 }
 
 /* ── Badge ──────────────────────────────────────────────────── */
@@ -203,13 +370,13 @@ a { color: inherit; text-decoration: none; }
   width: 3px;
   height: 3px;
   border-radius: 50%;
-  background: var(--gold);
+  background: var(--gold-fill);
 }
 
 /* ── Progress dots ──────────────────────────────────────────── */
 .dots           { display: flex; gap: 6px; }
-.dots span      { width: 6px; height: 6px; border-radius: 50%; background: rgba(247,240,228,0.15); }
-.dots span.on   { background: var(--gold); }
+.dots span      { width: 6px; height: 6px; border-radius: 50%; background: var(--dots-off); }
+.dots span.on   { background: var(--gold-fill); }
 
 /* ── Icon button (interactive) ──────────────────────────────── */
 .icon-btn {
@@ -219,7 +386,7 @@ a { color: inherit; text-decoration: none; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--gold-line-soft);
+  border: 1px solid var(--field-border);
   color: var(--ink);
   transition: 160ms;
 }
@@ -266,10 +433,11 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background: rgba(11, 8, 32, 0.7);
+  background: var(--nav-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--gold-line-soft);
+  box-shadow: var(--nav-shadow);
 }
 
 .bottom-nav button,
@@ -298,7 +466,7 @@ a { color: inherit; text-decoration: none; }
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: var(--gold);
+  background: var(--gold-fill);
   box-shadow: 0 0 8px var(--gold);
 }
 
@@ -464,6 +632,7 @@ a { color: inherit; text-decoration: none; }
 /* ── Tarot card ─────────────────────────────────────────────── */
 .tarot {
   position: relative;
+  color: var(--ink);
   border-radius: 12px;
   background:
     radial-gradient(120% 80% at 50% 0%, rgba(217,164,65,0.18), transparent 50%),

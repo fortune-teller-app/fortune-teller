@@ -14,11 +14,7 @@
 }
 
 .shell {
-  background:
-    radial-gradient(1100px 700px at 80% -10%, rgba(217,164,65,0.06), transparent 60%),
-    radial-gradient(900px 700px at -10% 30%, rgba(91,71,180,0.10), transparent 60%),
-    radial-gradient(1200px 900px at 50% 110%, rgba(28,18,70,0.70), transparent 60%),
-    #050410;
+  background: var(--page-bg-app);
 }
 
 .main {
