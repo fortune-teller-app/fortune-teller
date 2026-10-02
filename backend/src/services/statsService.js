@@ -1,4 +1,5 @@
 const supabase = require("../config/supabase");
+const { isReadingType } = require("../models/readingTypes");
 
 const MS_PER_DAY = 1000 * 60 * 60 * 24;
 
@@ -30,7 +31,11 @@ async function getReadingStatsByUserId(userId) {
     throw new Error("Could not load reading sessions.");
   }
 
-  const mostRead = (sessions ?? []).reduce((acc, row) => {
+  // Only known practices are counted: the frontend labels any unrecognised
+  // session_type as Tarot, so an unexpected value would be misreported.
+  const readings = (sessions ?? []).filter((row) => isReadingType(row.session_type));
+
+  const mostRead = readings.reduce((acc, row) => {
     acc[row.session_type] = (acc[row.session_type] ?? 0) + 1;
     return acc;
   }, {});
@@ -45,7 +50,7 @@ async function getReadingStatsByUserId(userId) {
   }
 
   return {
-    totalReadings: sessions?.length ?? 0,
+    totalReadings: readings.length,
     dreamCount: dreamCount ?? 0,
     daysKept,
     mostRead,

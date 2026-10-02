@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const supabase = require("./config/supabase");
 const authRoutes = require("./routes/authRoutes");
 const profileRoutes = require("./routes/profileRoutes");
+const palmReadingRoutes = require("./routes/palmReadingRoutes");
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/profile", profileRoutes);
+app.use("/api/palm", palmReadingRoutes);
 
 app.get("/", (req, res) => {
   res.json({

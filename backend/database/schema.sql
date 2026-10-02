@@ -173,6 +173,11 @@ ALTER TABLE palm_scan ENABLE ROW LEVEL SECURITY;
 -- =====================================================
 -- READING SESSION
 -- =====================================================
+-- The shared row every reading has, whatever its practice.
+-- Practice-specific detail lives in tarot_reading,
+-- palm_reading, astrology_reading, and dream_interpretation.
+-- Allowed session_type and status values mirror
+-- backend/src/models/readingTypes.js.
 
 CREATE TABLE reading_session (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -181,14 +186,24 @@ CREATE TABLE reading_session (
 
     session_type VARCHAR(50) NOT NULL,
 
+    title VARCHAR(255),
+    summary TEXT,
+
     started_at TIMESTAMPTZ DEFAULT NOW(),
     completed_at TIMESTAMPTZ,
 
     status VARCHAR(20) DEFAULT 'completed',
 
     created_at TIMESTAMPTZ DEFAULT NOW(),
-    updated_at TIMESTAMPTZ DEFAULT NOW()
+    updated_at TIMESTAMPTZ DEFAULT NOW(),
+
+    CONSTRAINT reading_session_session_type_check
+        CHECK (session_type IN ('tarot', 'palmistry', 'astrology', 'dream', 'daily')),
+    CONSTRAINT reading_session_status_check
+        CHECK (status IN ('completed'))
 );
+
+CREATE INDEX reading_session_user_created_at_idx ON reading_session (user_id, created_at DESC);
 
 ALTER TABLE reading_session ENABLE ROW LEVEL SECURITY;
 
