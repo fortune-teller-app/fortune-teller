@@ -42,6 +42,8 @@ export default function Icon({ name, size = 20, color = 'currentColor', strokeWi
     case 'logout':   return <svg {...common}><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/></svg>;
     case 'edit':     return <svg {...common}><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 1 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>;
     case 'wand':     return <svg {...common}><path d="M15 4V2M15 16v-2M8 9h2M20 9h2M17.8 11.8l1.4 1.4M17.8 6.2l1.4-1.4"/><path d="M9 22 22 9l-3-3L6 19z"/></svg>;
+    case 'upload':   return <svg {...common}><path d="M12 16V4"/><path d="m7 9 5-5 5 5"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>;
+    case 'refresh':  return <svg {...common}><path d="M20 11a8 8 0 0 0-14.5-4.5L4 8"/><path d="M4 4v4h4"/><path d="M4 13a8 8 0 0 0 14.5 4.5L20 16"/><path d="M20 20v-4h-4"/></svg>;
     case 'logo':
       return (
         <svg width={size} height={size} viewBox="-12 -12 24 24" fill="none" aria-hidden="true" style={style}>
